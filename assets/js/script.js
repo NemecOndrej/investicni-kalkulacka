@@ -21,7 +21,6 @@ function cleanInputValue(input) {
 function updateInputValue(input, value) {
   input.value = formatNumberWithCurrency(Math.round(value)); // Zaokrouhlí na celé číslo
 }
-
 // Opravená funkce pro výpočet složeného úroku
 function calculateFutureValue(initial, monthly, years, rate) {
   const months = years * 12;
@@ -43,23 +42,24 @@ function calculateAndUpdateChart() {
   const initial = parseInt(cleanInputValue(document.getElementById('initial')));
   const monthly = parseInt(cleanInputValue(document.getElementById('monthly')));
   const years = parseFloat(document.getElementById('years').value);
-  const rate = 0.1021; // Roční výnos 6%
+  const rate = 0.06; // Roční výnos 6%
 
   const futureValue = calculateFutureValue(initial, monthly, years, rate);
   document.getElementById('futureValue').innerText =
     formatNumberWithCurrency(futureValue);
 
-  // Data pro graf
+  // Data pro graf - zobrazení pouze po rocích
   const labels = Array.from({ length: years }, (_, i) => 2024 + i);
-  const investiceData = Array.from(
-    { length: years },
-    (_, i) => initial + monthly * i * 12,
-  );
-  const zhodnoceniData = Array.from({ length: years }, (_, i) =>
-    calculateFutureValue(initial, monthly, i, rate),
-  );
 
-  // Přizpůsobíme barvy a přidáme průhlednost pro investice a zhodnocení
+  const investiceData = Array.from({ length: years }, (_, i) => {
+    let totalInvestment = initial + monthly * 12 * i;
+    return totalInvestment;
+  });
+
+  const zhodnoceniData = Array.from({ length: years }, (_, i) => {
+    return calculateFutureValue(initial, monthly, i, rate);
+  });
+
   const ctx = document.getElementById('investmentChart').getContext('2d');
 
   const gradientInvestice = ctx.createLinearGradient(0, 0, 0, 400);
@@ -96,14 +96,17 @@ function calculateAndUpdateChart() {
     type: 'line',
     data: data,
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         x: {
           grid: {
             display: false, // Skryjeme mřížku na ose X
           },
           ticks: {
+            stepSize: 5,
             callback: function (val, index) {
-              return this.getLabelForValue(val); // Rotujeme popisky na ose X
+              return this.getLabelForValue(val); // Rotujeme popisky na ose Xy
             },
             maxRotation: 45, // Rotace popisků
             minRotation: 45,
@@ -117,6 +120,7 @@ function calculateAndUpdateChart() {
             color: '#ddd',
           },
           ticks: {
+            stepSize: 1000000,
             callback: function (value) {
               return value.toLocaleString('cs-CZ', {
                 style: 'currency',
@@ -140,7 +144,7 @@ function calculateAndUpdateChart() {
             usePointStyle: true, // Použijeme kolečka místo čtverců
             color: '#4e3a65',
             font: {
-              family: 'Arial',
+              family: 'Manrope',
               size: 14,
             },
             padding: 20,
@@ -237,7 +241,9 @@ document.getElementById('monthly').addEventListener('blur', function () {
 
 document.getElementById('years').addEventListener('input', function () {
   const years = document.getElementById('years').value;
-  document.getElementById('years-display').innerText = years + ' let';
+  document.getElementById(
+    'years-display',
+  ).innerHTML = `<strong>${years}</strong> let`;
   calculateAndUpdateChart();
 });
 

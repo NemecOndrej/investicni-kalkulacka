@@ -13,126 +13,174 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Nechte své peníze pracovat pro vás</h1>
+    <main>
+      <section class="invest-calculation">
+        <div class="container">
+          <div class="content">
+            <div class="calculator">
+              <div class="input-group">
+                <label for="initial">Počáteční vklad:</label>
+                <div class="input-controls">
+                  <button id="initial-decrease" class="button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                    >
+                      <path
+                        d="M17.875 11H4.125"
+                        stroke="#FAF3EB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input type="text" id="initial" value="500 000 Kč" />
+                  <button id="initial-increase" class="button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                    >
+                      <path
+                        d="M11 4.125V17.875"
+                        stroke="#FAF3EB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M17.875 11H4.125"
+                        stroke="#FAF3EB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
 
-      <div class="content">
-        <div class="calculator">
-          <div class="input-group">
-            <label for="initial">Počáteční vklad:</label>
-            <div class="input-controls">
-              <button id="initial-decrease" class="button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                >
-                  <path
-                    d="M17.875 11H4.125"
-                    stroke="#FAF3EB"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <input type="text" id="initial" value="500 000 Kč" />
-              <button id="initial-increase" class="button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                >
-                  <path
-                    d="M11 4.125V17.875"
-                    stroke="#FAF3EB"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M17.875 11H4.125"
-                    stroke="#FAF3EB"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
+              <div class="input-group">
+                <label for="monthly">Měsíční investice:</label>
+                <div class="input-controls">
+                  <button id="monthly-decrease" class="button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                    >
+                      <path
+                        d="M17.875 11H4.125"
+                        stroke="#FAF3EB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input type="text" id="monthly" value="10 000 Kč" />
+                  <button id="monthly-increase" class="button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                    >
+                      <path
+                        d="M11 4.125V17.875"
+                        stroke="#FAF3EB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M17.875 11H4.125"
+                        stroke="#FAF3EB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <div class="title">
+                  <label for="years">Délka investování (roky):</label>
+                  <span id="years-display"><strong>30</strong> let</span>
+                </div>
+                <input type="range" id="years" min="1" max="30" value="30" />
+              </div>
+
+              <div class="result">
+                <div class="result__content">
+                  <h2>Vaše potenciální budoucí výnosy jsou:</h2>
+                  <p id="futureValue">0 Kč</p>
+                </div>
+              </div>
+
+              <div class="vynos">
+                <div class="vynos__title">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M8.0013 14.3337C11.4991 14.3337 14.3346 11.4981 14.3346 8.00033C14.3346 4.50253 11.4991 1.66699 8.0013 1.66699C4.5035 1.66699 1.66797 4.50253 1.66797 8.00033C1.66797 11.4981 4.5035 14.3337 8.0013 14.3337Z"
+                      stroke="#928993"
+                      stroke-width="0.8125"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M8.00391 11.5181V7.2959"
+                      stroke="#928993"
+                      stroke-width="0.8125"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7.97168 4.96191H7.97921"
+                      stroke="#928993"
+                      stroke-width="1.08333"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <p>Cílový výnos fondu Aurelia je</p>
+                  <p class="percent">6 %</p>
+                </div>
+                <p class="description">
+                  Disclaimer alebo viac info o tom ako sa počítajú výnosy. Lorem
+                  ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                  suscipit sollicitudin lectus, sit amet viverra lacus placerat
+                  sed. Aliquam erat volutpat. Integer posuere, mauris ut
+                  suscipit fermentum, nulla felis condimentum sapien, id gravida
+                  sapien justo id enim. Donec sed orci nec purus bibendum.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="input-group">
-            <label for="monthly">Měsíční investice:</label>
-            <div class="input-controls">
-              <button id="monthly-decrease" class="button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                >
-                  <path
-                    d="M17.875 11H4.125"
-                    stroke="#FAF3EB"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <input type="text" id="monthly" value="10 000 Kč" />
-              <button id="monthly-increase" class="button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                >
-                  <path
-                    d="M11 4.125V17.875"
-                    stroke="#FAF3EB"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M17.875 11H4.125"
-                    stroke="#FAF3EB"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
+            <div class="chart-container">
+              <canvas id="investmentChart" width="768" height="559"></canvas>
             </div>
-          </div>
-
-          <div class="input-group">
-            <div class="title">
-              <label for="years">Délka investování (roky):</label>
-              <span id="years-display"><strong>30</strong> let</span>
-            </div>
-            <input type="range" id="years" min="1" max="30" value="30" />
-          </div>
-
-          <div class="result">
-            <h2>Vaše potenciální budoucí výnosy jsou:</h2>
-            <p id="futureValue">0 Kč</p>
           </div>
         </div>
-
-        <div class="chart-container">
-          <canvas id="investmentChart" width="400" height="200"></canvas>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.5/dist/chart.umd.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
