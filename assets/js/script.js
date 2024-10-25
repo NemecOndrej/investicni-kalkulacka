@@ -1,6 +1,5 @@
-let chartInstance; // Proměnná pro instanci grafu
+let chartInstance;
 
-// Pomocná funkce pro formátování čísla s měnou Kč (bez desetinných míst)
 function formatNumberWithCurrency(value) {
   return new Intl.NumberFormat('cs-CZ', {
     style: 'currency',
@@ -12,24 +11,19 @@ function formatNumberWithCurrency(value) {
     .replace('CZK', 'Kč');
 }
 
-// Funkce pro odstranění měny a formátovacích znaků při focusu na input
 function cleanInputValue(input) {
   return input.value.replace(/\s+Kč/g, '').replace(/\s/g, '');
 }
 
-// Funkce pro aktualizaci hodnoty inputu a přidání Kč
 function updateInputValue(input, value) {
-  input.value = formatNumberWithCurrency(Math.round(value)); // Zaokrouhlí na celé číslo
+  input.value = formatNumberWithCurrency(Math.round(value));
 }
-// Opravená funkce pro výpočet složeného úroku
 function calculateFutureValue(initial, monthly, years, rate) {
   const months = years * 12;
   const monthlyRate = rate / 12; // Měsíční úroková sazba
 
-  // Zhodnocení počátečního vkladu
   let futureValue = initial * Math.pow(1 + monthlyRate, months);
 
-  // Přidání měsíčních investic, kde každá investice má jiné zhodnocení podle doby v investici
   for (let i = 1; i <= months; i++) {
     futureValue += monthly * Math.pow(1 + monthlyRate, months - i);
   }
@@ -37,7 +31,6 @@ function calculateFutureValue(initial, monthly, years, rate) {
   return futureValue;
 }
 
-// Funkce pro výpočet a zobrazení grafu
 function calculateAndUpdateChart() {
   const initial = parseInt(cleanInputValue(document.getElementById('initial')));
   const monthly = parseInt(cleanInputValue(document.getElementById('monthly')));
@@ -48,7 +41,6 @@ function calculateAndUpdateChart() {
   document.getElementById('futureValue').innerText =
     formatNumberWithCurrency(futureValue);
 
-  // Data pro graf - zobrazení pouze po rocích
   const labels = Array.from({ length: years }, (_, i) => 2024 + i);
 
   const investiceData = Array.from({ length: years }, (_, i) => {
@@ -101,20 +93,20 @@ function calculateAndUpdateChart() {
       scales: {
         x: {
           grid: {
-            display: false, // Skryjeme mřížku na ose X
+            display: false,
           },
           ticks: {
             stepSize: 5,
             callback: function (val, index) {
-              return this.getLabelForValue(val); // Rotujeme popisky na ose Xy
+              return this.getLabelForValue(val);
             },
-            maxRotation: 45, // Rotace popisků
+            maxRotation: 45,
             minRotation: 45,
           },
         },
         y: {
           beginAtZero: true,
-          position: 'right', // Stupnice bude napravo
+          position: 'right',
           grid: {
             display: true,
             color: '#ddd',
@@ -133,21 +125,22 @@ function calculateAndUpdateChart() {
       },
       elements: {
         point: {
-          radius: 0, // Skryjeme body na grafu
+          radius: 0,
         },
       },
       plugins: {
         legend: {
           display: true,
-          position: 'bottom', // Umístíme legendu pod graf
+          position: 'bottom',
           labels: {
-            usePointStyle: true, // Použijeme kolečka místo čtverců
+            usePointStyle: true,
             color: '#4e3a65',
             font: {
               family: 'Manrope',
               size: 14,
             },
-            padding: 20,
+            padding: 37,
+            textAlign: 'center',
           },
         },
         tooltip: {
@@ -164,7 +157,6 @@ function calculateAndUpdateChart() {
   chartInstance = new Chart(ctx, config);
 }
 
-// Event listenery pro tlačítka zvýšení/snížení hodnot
 document
   .getElementById('initial-increase')
   .addEventListener('click', function () {
@@ -209,7 +201,6 @@ document
     calculateAndUpdateChart();
   });
 
-// Při focusu na input odstraníme formátování a měnu
 document.getElementById('initial').addEventListener('focus', function () {
   const input = document.getElementById('initial');
   input.value = cleanInputValue(input); // Odstraníme "Kč" a mezery
@@ -220,7 +211,6 @@ document.getElementById('monthly').addEventListener('focus', function () {
   input.value = cleanInputValue(input); // Odstraníme "Kč" a mezery
 });
 
-// Při blur formátujeme zpět na formátované číslo s "Kč"
 document.getElementById('initial').addEventListener('blur', function () {
   const input = document.getElementById('initial');
   let value = parseInt(cleanInputValue(input));
@@ -247,7 +237,31 @@ document.getElementById('years').addEventListener('input', function () {
   calculateAndUpdateChart();
 });
 
-// Inicializace grafu při prvním načtení
+function validateMinValue() {
+  const input = document.getElementById('initial');
+  const errorMessage = document.getElementById('error-message');
+  const minValue = 1000;
+
+  const numericValue = parseInt(input.value.replace(/\D/g, ''));
+
+  if (numericValue < minValue || isNaN(numericValue)) {
+    errorMessage.style.display = 'block';
+  } else {
+    errorMessage.style.display = 'none';
+  }
+}
+
+function enforceMinValue() {
+  const input = document.getElementById('initial');
+  const minValue = 1000;
+
+  const numericValue = parseInt(input.value.replace(/\D/g, ''));
+
+  if (numericValue < minValue || isNaN(numericValue)) {
+    input.value = `${minValue} Kč`;
+  }
+}
+
 updateInputValue(document.getElementById('initial'), 500000);
 updateInputValue(document.getElementById('monthly'), 10000);
 calculateAndUpdateChart();
