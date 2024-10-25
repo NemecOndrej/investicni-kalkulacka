@@ -93,7 +93,13 @@
                       />
                     </svg>
                   </button>
-                  <input type="text" id="monthly" value="10 000 Kč" />
+                  <input
+                    type="text"
+                    id="monthly"
+                    value="10 000 Kč"
+                    onfocus="showInvestmentMessage()"
+                    onblur="hideInvestmentMessage()"
+                  />
                   <button id="monthly-increase" class="button">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -119,6 +125,10 @@
                     </svg>
                   </button>
                 </div>
+                <p id="investment-message" style="display: none">
+                  Pravidelná investice není podmínkou - investujte vždy tolik,
+                  kolik si v aktuální situaci můžete dovolit.
+                </p>
               </div>
 
               <div class="input-group">
