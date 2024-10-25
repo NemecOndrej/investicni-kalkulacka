@@ -260,7 +260,7 @@ input[type='range'] {
   color: var(--Body-text, #928993);
   text-align: center;
   font-family: var(--primary-font);
-  font-size: 16px;
+  font-size: clamp(14px, 2vw, 16px);
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -270,7 +270,7 @@ input[type='range'] {
   color: #6c4a71;
   text-align: center;
   font-family: var(--primary-font);
-  font-size: 24px;
+  font-size: clamp(20px, 3vw, 24px);
   font-style: normal;
   font-weight: 700;
   line-height: normal;
