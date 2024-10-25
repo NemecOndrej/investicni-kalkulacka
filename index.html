@@ -19,7 +19,7 @@
           <div class="content">
             <div class="calculator">
               <div class="input-group">
-                <label for="initial">Počáteční vklad:</label>
+                <label for="initial">Počáteční vklad</label>
                 <div class="input-controls">
                   <button id="initial-decrease" class="button">
                     <svg
@@ -38,7 +38,13 @@
                       />
                     </svg>
                   </button>
-                  <input type="text" id="initial" value="500 000 Kč" />
+                  <input
+                    type="text"
+                    id="initial"
+                    oninput="validateMinValue()"
+                    onblur="enforceMinValue()"
+                    value="500 000 Kč"
+                  />
                   <button id="initial-increase" class="button">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -64,10 +70,11 @@
                     </svg>
                   </button>
                 </div>
+                <p id="error-message">Minimální vklad již od 1000 Kč</p>
               </div>
 
               <div class="input-group">
-                <label for="monthly">Měsíční investice:</label>
+                <label for="monthly">Pravidelná měsíční investice</label>
                 <div class="input-controls">
                   <button id="monthly-decrease" class="button">
                     <svg
@@ -116,7 +123,7 @@
 
               <div class="input-group">
                 <div class="title">
-                  <label for="years">Délka investování (roky):</label>
+                  <label for="years">Délka investování</label>
                   <span id="years-display"><strong>30</strong> let</span>
                 </div>
                 <input type="range" id="years" min="1" max="30" value="30" />
@@ -124,7 +131,7 @@
 
               <div class="result">
                 <div class="result__content">
-                  <h2>Vaše potenciální budoucí výnosy jsou:</h2>
+                  <h2>Očekávaná hodnota majetku</h2>
                   <p id="futureValue">0 Kč</p>
                 </div>
               </div>
@@ -160,7 +167,7 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <p>Cílový výnos fondu Aurelia je</p>
+                  <p class="cilovy-vynos">Cílový výnos fondu Aurelia je</p>
                   <p class="percent">6 %</p>
                 </div>
                 <p class="description">
