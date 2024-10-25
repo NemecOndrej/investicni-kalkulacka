@@ -84,6 +84,15 @@ h1 {
   line-height: normal;
 }
 
+#investment-message {
+  color: #7c8285;
+  font-size: clamp(12px, 1.5vw, 14px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: start;
+}
+
 .input-group #monthly,
 .input-group #initial {
   width: 100%;
