@@ -20,7 +20,7 @@ function updateInputValue(input, value) {
 }
 function calculateFutureValue(initial, monthly, years, rate) {
   const months = years * 12;
-  const monthlyRate = rate / 12; // Měsíční úroková sazba
+  const monthlyRate = rate / 12;
 
   let futureValue = initial * Math.pow(1 + monthlyRate, months);
 
@@ -41,16 +41,43 @@ function calculateAndUpdateChart() {
   document.getElementById('futureValue').innerText =
     formatNumberWithCurrency(futureValue);
 
-  const labels = Array.from({ length: years }, (_, i) => 2024 + i);
+  const czechMonths = [
+    'Leden',
+    'Únor',
+    'Březen',
+    'Duben',
+    'Květen',
+    'Červen',
+    'Červenec',
+    'Srpen',
+    'Září',
+    'Říjen',
+    'Listopad',
+    'Prosinec',
+  ];
 
-  const investiceData = Array.from({ length: years }, (_, i) => {
-    let totalInvestment = initial + monthly * 12 * i;
-    return totalInvestment;
-  });
+  let labels, investiceData, zhodnoceniData;
+  if (years === 1) {
+    labels = czechMonths;
 
-  const zhodnoceniData = Array.from({ length: years }, (_, i) => {
-    return calculateFutureValue(initial, monthly, i, rate);
-  });
+    investiceData = Array.from({ length: 12 }, (_, i) => {
+      return initial + monthly * (i + 1);
+    });
+
+    zhodnoceniData = Array.from({ length: 12 }, (_, i) => {
+      return calculateFutureValue(initial, monthly, (i + 1) / 12, rate);
+    });
+  } else {
+    labels = Array.from({ length: years }, (_, i) => 2024 + i);
+
+    investiceData = Array.from({ length: years }, (_, i) => {
+      return initial + monthly * 12 * (i + 1);
+    });
+
+    zhodnoceniData = Array.from({ length: years }, (_, i) => {
+      return calculateFutureValue(initial, monthly, i + 1, rate);
+    });
+  }
 
   const ctx = document.getElementById('investmentChart').getContext('2d');
 
@@ -96,7 +123,7 @@ function calculateAndUpdateChart() {
             display: false,
           },
           ticks: {
-            stepSize: 5,
+            stepSize: years === 1 ? 1 : 5,
             callback: function (val, index) {
               return this.getLabelForValue(val);
             },
@@ -112,7 +139,7 @@ function calculateAndUpdateChart() {
             color: '#ddd',
           },
           ticks: {
-            stepSize: 1000000,
+            stepSize: 100000,
             callback: function (value) {
               return value.toLocaleString('cs-CZ', {
                 style: 'currency',
@@ -125,7 +152,7 @@ function calculateAndUpdateChart() {
       },
       elements: {
         point: {
-          radius: 0,
+          radius: years === 1 ? 3 : 0,
         },
       },
       plugins: {
@@ -260,6 +287,16 @@ function enforceMinValue() {
   if (numericValue < minValue || isNaN(numericValue)) {
     input.value = `${minValue} Kč`;
   }
+}
+
+function showInvestmentMessage() {
+  const message = document.getElementById('investment-message');
+  message.style.display = 'block';
+}
+
+function hideInvestmentMessage() {
+  const message = document.getElementById('investment-message');
+  message.style.display = 'none';
 }
 
 updateInputValue(document.getElementById('initial'), 500000);
