@@ -2,19 +2,19 @@ let chartInstance;
 
 // Formátování čísla s měnou Kč
 function formatNumberWithCurrency(value) {
-  return new Intl.NumberFormat('cs-CZ', {
-    style: 'currency',
-    currency: 'CZK',
+  return new Intl.NumberFormat("cs-CZ", {
+    style: "currency",
+    currency: "CZK",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })
     .format(value)
-    .replace('CZK', 'Kč');
+    .replace("CZK", "Kč");
 }
 
 // Vyčištění vstupní hodnoty pro čisté číslo
 function cleanInputValue(input) {
-  return input.value.replace(/\s+Kč/g, '').replace(/\s/g, '');
+  return input.value.replace(/\s+Kč/g, "").replace(/\s/g, "");
 }
 
 // Aktualizace vstupní hodnoty s formátovanou měnou
@@ -37,28 +37,28 @@ function calculateFutureValue(initial, monthly, years, rate) {
 
 // Aktualizace a vykreslení grafu
 function calculateAndUpdateChart() {
-  const initial = parseInt(cleanInputValue(document.getElementById('initial')));
-  const monthly = parseInt(cleanInputValue(document.getElementById('monthly')));
-  const years = parseFloat(document.getElementById('years').value);
+  const initial = parseInt(cleanInputValue(document.getElementById("initial")));
+  const monthly = parseInt(cleanInputValue(document.getElementById("monthly")));
+  const years = parseFloat(document.getElementById("years").value);
   const rate = 0.06;
 
   const futureValue = calculateFutureValue(initial, monthly, years, rate);
-  document.getElementById('futureValue').innerText =
+  document.getElementById("futureValue").innerText =
     formatNumberWithCurrency(futureValue);
 
   const czechMonths = [
-    'Leden',
-    'Únor',
-    'Březen',
-    'Duben',
-    'Květen',
-    'Červen',
-    'Červenec',
-    'Srpen',
-    'Září',
-    'Říjen',
-    'Listopad',
-    'Prosinec',
+    "Leden",
+    "Únor",
+    "Březen",
+    "Duben",
+    "Květen",
+    "Červen",
+    "Červenec",
+    "Srpen",
+    "Září",
+    "Říjen",
+    "Listopad",
+    "Prosinec",
   ];
 
   let labels, investiceData, zhodnoceniData;
@@ -82,30 +82,30 @@ function calculateAndUpdateChart() {
     );
   }
 
-  const ctx = document.getElementById('investmentChart').getContext('2d');
-  const gradientInvestice = ctx.createLinearGradient(0, 0, 0, 400);
-  gradientInvestice.addColorStop(0, '#ccc');
-  gradientInvestice.addColorStop(1, '#eee');
-  const gradientZhodnoceni = ctx.createLinearGradient(0, 0, 0, 400);
-  gradientZhodnoceni.addColorStop(0, '#4e3a65');
-  gradientZhodnoceni.addColorStop(1, '#7a5e95');
+  const ctx = document.getElementById("investmentChart").getContext("2d");
+  const gradientInvestice = ctx.createLinearGradient(0, 0, 800, 100);
+  gradientInvestice.addColorStop(0.1895, "#D4C8BC");
+  gradientInvestice.addColorStop(0.8249, "#B8AC9C");
+  const gradientZhodnoceni = ctx.createLinearGradient(400, 0, 0, 400); // Upravené souřadnice pro přibližný úhel 218°
+  gradientZhodnoceni.addColorStop(0.1136, "#331E37"); // 11.36%
+  gradientZhodnoceni.addColorStop(0.7815, "#6C4A71"); // 78.15%
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: 'Investice',
+        label: "Investice",
         data: investiceData,
         backgroundColor: gradientInvestice,
-        borderColor: '#ccc',
+
         fill: true,
         tension: 0.4,
       },
       {
-        label: 'Zhodnocení',
+        label: "Zhodnocení",
         data: zhodnoceniData,
         backgroundColor: gradientZhodnoceni,
-        borderColor: '#4e3a65',
+
         fill: true,
         tension: 0.4,
       },
@@ -113,7 +113,7 @@ function calculateAndUpdateChart() {
   };
 
   const config = {
-    type: 'line',
+    type: "line",
     data: data,
     options: {
       responsive: true,
@@ -129,14 +129,14 @@ function calculateAndUpdateChart() {
         },
         y: {
           beginAtZero: true,
-          position: 'right',
-          grid: { display: true, color: '#ddd' },
+          position: "right",
+          grid: { display: true, color: "#ddd" },
           ticks: {
             stepSize: 100000,
             callback: function (value) {
-              return value.toLocaleString('cs-CZ', {
-                style: 'currency',
-                currency: 'CZK',
+              return value.toLocaleString("cs-CZ", {
+                style: "currency",
+                currency: "CZK",
                 minimumFractionDigits: 0,
               });
             },
@@ -147,13 +147,13 @@ function calculateAndUpdateChart() {
       plugins: {
         legend: {
           display: true,
-          position: 'bottom',
+          position: "bottom",
           labels: {
             usePointStyle: true,
-            color: '#4e3a65',
-            font: { family: 'Manrope', size: 14 },
+            color: "#4e3a65",
+            font: { family: "Manrope", size: 14 },
             padding: 37,
-            textAlign: 'center',
+            textAlign: "center",
           },
         },
         tooltip: { enabled: true },
@@ -170,33 +170,33 @@ function calculateAndUpdateChart() {
 
 // Obsluhy událostí pro vstupy a tlačítka
 document
-  .getElementById('initial-decrease')
-  .addEventListener('click', function () {
-    const input = document.getElementById('initial');
+  .getElementById("initial-decrease")
+  .addEventListener("click", function () {
+    const input = document.getElementById("initial");
     let value = parseInt(cleanInputValue(input));
-    value -= 10000;
-    value = value < 1000 ? 1000 : value;
+    value -= 5000;
+    value = value < 500 ? 500 : value;
     updateInputValue(input, value);
-    document.getElementById('error-message').style.display =
-      value === 1000 ? 'block' : 'none';
+    document.getElementById("error-message").style.display =
+      value === 500 ? "block" : "none";
     calculateAndUpdateChart();
   });
 
 document
-  .getElementById('initial-increase')
-  .addEventListener('click', function () {
-    const input = document.getElementById('initial');
+  .getElementById("initial-increase")
+  .addEventListener("click", function () {
+    const input = document.getElementById("initial");
     let value = parseInt(cleanInputValue(input));
-    value += 10000;
+    value += 5000;
     updateInputValue(input, value);
-    document.getElementById('error-message').style.display = 'none';
+    document.getElementById("error-message").style.display = "none";
     calculateAndUpdateChart();
   });
 
 document
-  .getElementById('monthly-increase')
-  .addEventListener('click', function () {
-    const input = document.getElementById('monthly');
+  .getElementById("monthly-increase")
+  .addEventListener("click", function () {
+    const input = document.getElementById("monthly");
     let value = parseInt(cleanInputValue(input));
     value += 1000;
     updateInputValue(input, value);
@@ -205,9 +205,9 @@ document
   });
 
 document
-  .getElementById('monthly-decrease')
-  .addEventListener('click', function () {
-    const input = document.getElementById('monthly');
+  .getElementById("monthly-decrease")
+  .addEventListener("click", function () {
+    const input = document.getElementById("monthly");
     let value = parseInt(cleanInputValue(input));
     value = Math.max(value - 1000, 0);
     updateInputValue(input, value);
@@ -217,36 +217,36 @@ document
 
 // Kontrola minimální hodnoty pro počáteční vklad
 function validateMinValue() {
-  const input = document.getElementById('initial');
-  const errorMessage = document.getElementById('error-message');
+  const input = document.getElementById("initial");
+  const errorMessage = document.getElementById("error-message");
   const minValue = 1000;
   const numericValue = parseInt(cleanInputValue(input));
 
   // Zobrazí chybovou hlášku, pokud hodnota klesne pod 1000 Kč
   if (numericValue < minValue || isNaN(numericValue)) {
-    errorMessage.style.display = 'block';
+    errorMessage.style.display = "block";
   } else {
-    errorMessage.style.display = 'none';
+    errorMessage.style.display = "none";
   }
 }
 
 // Události pro kontrolu hodnoty při zadávání i opuštění pole
-document.getElementById('initial').addEventListener('input', validateMinValue);
+document.getElementById("initial").addEventListener("input", validateMinValue);
 
-document.getElementById('initial').addEventListener('focus', function () {
-  document.getElementById('error-message').style.display = 'none';
+document.getElementById("initial").addEventListener("focus", function () {
+  document.getElementById("error-message").style.display = "none";
   this.value = cleanInputValue(this);
 });
-document.getElementById('initial').addEventListener('blur', function () {
+document.getElementById("initial").addEventListener("blur", function () {
   let value = parseInt(cleanInputValue(this));
   if (!isNaN(value)) updateInputValue(this, value);
   calculateAndUpdateChart();
 });
-document.getElementById('monthly').addEventListener('focus', function () {
+document.getElementById("monthly").addEventListener("focus", function () {
   this.value = cleanInputValue(this);
   showInvestmentMessage();
 });
-document.getElementById('monthly').addEventListener('blur', function () {
+document.getElementById("monthly").addEventListener("blur", function () {
   let value = parseInt(cleanInputValue(this));
   if (!isNaN(value)) updateInputValue(this, value);
   hideInvestmentMessage();
@@ -254,32 +254,31 @@ document.getElementById('monthly').addEventListener('blur', function () {
 });
 
 // Skrytí zprávy při kliknutí mimo tlačítka nebo vstupy
-document.body.addEventListener('click', function (event) {
+document.body.addEventListener("click", function (event) {
   const isClickInside =
-    event.target.closest('#monthly-increase') ||
-    event.target.closest('#monthly-decrease') ||
-    event.target.closest('#monthly');
+    event.target.closest("#monthly-increase") ||
+    event.target.closest("#monthly-decrease") ||
+    event.target.closest("#monthly");
   if (!isClickInside) {
     hideInvestmentMessage();
   }
 });
 
 // Aktualizace grafu při změně hodnoty let
-document.getElementById('years').addEventListener('input', function () {
-  document.getElementById(
-    'years-display',
-  ).innerHTML = `<strong>${this.value}</strong> let`;
+document.getElementById("years").addEventListener("input", function () {
+  document.getElementById("years-display").innerHTML =
+    `<strong>${this.value}</strong> let`;
   calculateAndUpdateChart();
 });
 
 // Funkce pro zobrazení/skrytí zprávy
 function showInvestmentMessage() {
-  document.getElementById('investment-message').style.display = 'block';
+  document.getElementById("investment-message").style.display = "block";
 }
 function hideInvestmentMessage() {
-  document.getElementById('investment-message').style.display = 'none';
+  document.getElementById("investment-message").style.display = "none";
 }
 
-updateInputValue(document.getElementById('initial'), 500000);
-updateInputValue(document.getElementById('monthly'), 10000);
+updateInputValue(document.getElementById("initial"), 50000);
+updateInputValue(document.getElementById("monthly"), 2500);
 calculateAndUpdateChart();
