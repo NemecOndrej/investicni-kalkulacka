@@ -308,6 +308,7 @@ canvas {
     display: flex; /* přidáno */
     flex-direction: column; /* přidáno */
   }
+
   .content {
     flex-direction: column;
     gap: 30px;
