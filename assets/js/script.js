@@ -168,7 +168,6 @@ function calculateAndUpdateChart() {
   chartInstance = new Chart(ctx, config);
 }
 
-// Obsluhy událostí pro vstupy a tlačítka
 document
   .getElementById("initial-decrease")
   .addEventListener("click", function () {
@@ -177,8 +176,7 @@ document
     value -= 5000;
     value = value < 500 ? 500 : value;
     updateInputValue(input, value);
-    document.getElementById("error-message").style.display =
-      value === 500 ? "block" : "none";
+    document.getElementById("error-message").style.display = "none";
     calculateAndUpdateChart();
   });
 
@@ -192,6 +190,22 @@ document
     document.getElementById("error-message").style.display = "none";
     calculateAndUpdateChart();
   });
+
+// Kontrola minimální hodnoty pro počáteční vklad
+function validateMinValue() {
+  const input = document.getElementById("initial");
+  const errorMessage = document.getElementById("error-message");
+  const numericValue = parseInt(cleanInputValue(input));
+
+  if (numericValue <= 500) {
+    errorMessage.style.display = numericValue === 500 ? "none" : "block";
+  } else {
+    errorMessage.style.display = "none";
+  }
+}
+
+// Události pro kontrolu hodnoty při zadávání
+document.getElementById("initial").addEventListener("input", validateMinValue);
 
 document
   .getElementById("monthly-increase")
@@ -219,7 +233,7 @@ document
 function validateMinValue() {
   const input = document.getElementById("initial");
   const errorMessage = document.getElementById("error-message");
-  const minValue = 1000;
+  const minValue = 500;
   const numericValue = parseInt(cleanInputValue(input));
 
   // Zobrazí chybovou hlášku, pokud hodnota klesne pod 1000 Kč
