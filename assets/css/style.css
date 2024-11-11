@@ -344,6 +344,9 @@ canvas {
     max-width: 100%;
     justify-content: center;
   }
+  canvas {
+    height: 578px !important;
+  }
 }
 
 @media (max-width: 809px) {
