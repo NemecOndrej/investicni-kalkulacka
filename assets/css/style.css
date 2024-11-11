@@ -348,12 +348,12 @@ canvas {
 
 @media only screen and (max-width: 809px) {
   canvas {
-    max-height: 350px !important;
+    max-height: 350px;
   }
 }
 
 @media only screen and (max-width: 900px) {
   canvas {
-    max-height: 578px !important;
+    max-height: 578px;
   }
 }
