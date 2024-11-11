@@ -344,9 +344,7 @@ canvas {
     max-width: 100%;
     justify-content: center;
   }
-}
 
-@media (max-width: 810px) {
   canvas {
     height: auto !important;
     max-height: 100%;
@@ -354,7 +352,7 @@ canvas {
   }
 }
 
-@media (max-width: 809px) {
+@media only screen and(max-width: 809px) {
   canvas {
     height: min-content !important;
     max-height: 20rem;
