@@ -346,16 +346,13 @@ canvas {
   }
 
   canvas {
-    height: auto !important;
-    max-height: 100%;
+    height: 100% !important;
     padding: 20px;
   }
 }
 
-@media (min-width: 809px) {
+@media (max-width: 809px) {
   canvas {
-    height: min-content !important;
-    max-height: 20rem;
-    padding: 20px;
+    height: 20rem !important;
   }
 }
