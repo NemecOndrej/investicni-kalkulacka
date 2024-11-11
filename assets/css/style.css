@@ -1,5 +1,5 @@
 :root {
-  --primary-font: 'Manrope', sans-serif;
+  --primary-font: "Manrope", sans-serif;
   --primary-color: #6c4a71;
   --secondary-color: #7a5e95;
   --background-color: #f8f5f1;
@@ -46,15 +46,14 @@ body {
   text-align: center;
 }
 
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
 h1 {
   font-size: clamp(20px, 4vw, 24px);
   margin-bottom: 20px;
-}
-
-.content {
-  display: flex;
-  height: auto;
-  justify-content: space-between;
 }
 
 .calculator {
@@ -196,7 +195,7 @@ button:hover {
   line-height: normal;
 }
 
-input[type='range'] {
+input[type="range"] {
   accent-color: var(--input-button-color);
 }
 
@@ -304,10 +303,18 @@ canvas {
 }
 
 @media (max-width: 900px) {
+  .container {
+    height: 100vh; /* přidáno */
+    display: flex; /* přidáno */
+    flex-direction: column; /* přidáno */
+  }
   .content {
     flex-direction: column;
+    gap: 30px;
     align-items: center;
-    gap: 38px;
+    height: 100%; /* změněno z auto na 100% */
+    justify-content: space-between;
+    flex: 1; /* přidáno */
   }
 
   .calculator {
