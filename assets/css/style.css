@@ -346,14 +346,14 @@ canvas {
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 809px) {
   canvas {
-    max-height: 578px !important;
+    max-height: 350px !important;
   }
 }
 
-@media only screen and (max-width: 809px) {
+@media only screen and (max-width: 900px) {
   canvas {
-    max-height: 350px;
+    max-height: 578px !important;
   }
 }
