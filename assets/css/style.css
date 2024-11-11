@@ -287,7 +287,6 @@ input[type="range"] {
 .chart-container {
   width: 100%;
   max-width: 729px;
-  height: auto;
 }
 
 canvas {
@@ -344,5 +343,17 @@ canvas {
   .vynos__title {
     max-width: 100%;
     justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  canvas {
+    max-height: 578px;
+  }
+}
+
+@media only screen and (max-width: 809px) {
+  canvas {
+    max-height: 350px;
   }
 }
