@@ -344,11 +344,6 @@ canvas {
     max-width: 100%;
     justify-content: center;
   }
-
-  canvas {
-    height: auto !important;
-    padding: 40px;
-  }
 }
 
 @media (max-width: 809px) {
