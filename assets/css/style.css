@@ -347,6 +347,13 @@ canvas {
 
   canvas {
     height: 100% !important;
+    padding: 40px;
+  }
+}
+
+@media (max-width: 810px) {
+  canvas {
+    height: 100% !important;
     padding: 20px;
   }
 }
