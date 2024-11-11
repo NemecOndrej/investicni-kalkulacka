@@ -344,8 +344,18 @@ canvas {
     max-width: 100%;
     justify-content: center;
   }
+}
 
+@media (max-width: 900px) {
   canvas {
     height: auto !important;
+  }
+}
+
+@media (max-width: 809px) {
+  canvas {
+    height: min-content !important;
+    max-height: 20rem;
+    padding: 20px;
   }
 }
