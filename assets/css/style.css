@@ -344,6 +344,10 @@ canvas {
     max-width: 100%;
     justify-content: center;
   }
+
+  .chart-container {
+    height: 100%;
+  }
 }
 
 @media only screen and (max-width: 900px) {
