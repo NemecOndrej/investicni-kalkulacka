@@ -1,20 +1,92 @@
 let chartInstance;
 
+const translations = {
+  cs: {
+    title: "Investiční kalkulačka",
+    initialLabel: "Počáteční vklad",
+    minimumDeposit: "Minimální vklad již od 500 Kč",
+    monthlyLabel: "Pravidelná měsíční investice",
+    investmentMessage:
+      "Pravidelná investice není podmínkou - investujte vždy tolik, kolik si v aktuální situaci můžete dovolit.",
+    yearsLabel: "Délka investování",
+    year: "rok",
+    years: "let",
+    resultLabel: "Očekávaná hodnota majetku",
+    targetReturn: "Cílový výnos fondu Aurelia je",
+    investment: "Investice",
+    appreciation: "Zhodnocení",
+    months: [
+      "Leden", "Únor", "Březen", "Duben", "Květen", "Červen",
+      "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec",
+    ],
+    disclaimer:
+      "<strong>Upozornění:</strong> Prezentované scénáře představují odhad budoucí výkonnosti založený na údajích z minulosti týkajících se toho, jak se mění hodnota této investice, a/nebo na aktuálních tržních podmínkách a nepředstavují přesný ukazatel. Váš zisk se bude lišit v závislosti na tom, jaká bude situace na trhu a jak dlouho budete investici/produkt držet. Aurelia nemovitostní fond SMS & Axelor, podfond je podfondem Aurelia fondy SICAV a.s.",
+  },
+  en: {
+    title: "Investment Calculator",
+    initialLabel: "Initial investment",
+    minimumDeposit: "Minimum investment from CZK 500",
+    monthlyLabel: "Regular monthly investment",
+    investmentMessage:
+      "Regular investing is not required – always invest only as much as you can afford in your current situation.",
+    yearsLabel: "Investment period",
+    year: "year",
+    years: "years",
+    resultLabel: "Expected portfolio value",
+    targetReturn: "The Aurelia fund's target return is",
+    investment: "Contributions",
+    appreciation: "Portfolio value",
+    months: [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December",
+    ],
+    disclaimer:
+      "<strong>Disclaimer:</strong> The scenarios presented are estimates of future performance based on past data regarding changes in the value of this investment and/or current market conditions and are not an exact indicator. Your return will vary depending on market conditions and how long you hold the investment/product. Aurelia nemovitostní fond SMS & Axelor, podfond is a sub-fund of Aurelia fondy SICAV a.s.",
+  },
+};
+
+const requestedLanguage = new URLSearchParams(window.location.search)
+  .get("lang")
+  ?.toLowerCase();
+const language = requestedLanguage === "en" ? "en" : "cs";
+const locale = language === "en" ? "en-GB" : "cs-CZ";
+const t = translations[language];
+
+function updateYearsDisplay(value) {
+  const unit = Number(value) === 1 ? t.year : t.years;
+  document.getElementById("years-display").innerHTML =
+    `<strong>${value}</strong> ${unit}`;
+}
+
+function applyTranslations() {
+  document.documentElement.lang = language;
+  document.title = t.title;
+  document.getElementById("initial-label").textContent = t.initialLabel;
+  document.getElementById("error-message").textContent = t.minimumDeposit;
+  document.getElementById("monthly-label").textContent = t.monthlyLabel;
+  document.getElementById("investment-message").textContent =
+    t.investmentMessage;
+  document.getElementById("years-label").textContent = t.yearsLabel;
+  document.getElementById("result-label").textContent = t.resultLabel;
+  document.getElementById("target-return-label").textContent = t.targetReturn;
+  document.getElementById("disclaimer").innerHTML = t.disclaimer;
+  updateYearsDisplay(document.getElementById("years").value);
+}
+
 // Formátování čísla s měnou Kč
 function formatNumberWithCurrency(value) {
-  return new Intl.NumberFormat("cs-CZ", {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "CZK",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })
-    .format(value)
-    .replace("CZK", "Kč");
+    .format(value);
 }
 
 // Vyčištění vstupní hodnoty pro čisté číslo
 function cleanInputValue(input) {
-  return input.value.replace(/\s+Kč/g, "").replace(/\s/g, "");
+  return input.value.replace(/[^\d-]/g, "");
 }
 
 // Aktualizace vstupní hodnoty s formátovanou měnou
@@ -46,24 +118,9 @@ function calculateAndUpdateChart() {
   document.getElementById("futureValue").innerText =
     formatNumberWithCurrency(futureValue);
 
-  const czechMonths = [
-    "Leden",
-    "Únor",
-    "Březen",
-    "Duben",
-    "Květen",
-    "Červen",
-    "Červenec",
-    "Srpen",
-    "Září",
-    "Říjen",
-    "Listopad",
-    "Prosinec",
-  ];
-
   let labels, investiceData, zhodnoceniData;
   if (years === 1) {
-    labels = czechMonths;
+    labels = t.months;
     investiceData = Array.from(
       { length: 12 },
       (_, i) => initial + monthly * (i + 1),
@@ -94,7 +151,7 @@ function calculateAndUpdateChart() {
     labels: labels,
     datasets: [
       {
-        label: "Investice",
+        label: t.investment,
         data: investiceData,
         backgroundColor: gradientInvestice,
 
@@ -102,7 +159,7 @@ function calculateAndUpdateChart() {
         tension: 0.4,
       },
       {
-        label: "Zhodnocení",
+        label: t.appreciation,
         data: zhodnoceniData,
         backgroundColor: gradientZhodnoceni,
 
@@ -134,7 +191,7 @@ function calculateAndUpdateChart() {
           ticks: {
             stepSize: 100000,
             callback: function (value) {
-              return value.toLocaleString("cs-CZ", {
+              return value.toLocaleString(locale, {
                 style: "currency",
                 currency: "CZK",
                 minimumFractionDigits: 0,
@@ -280,8 +337,7 @@ document.body.addEventListener("click", function (event) {
 
 // Aktualizace grafu při změně hodnoty let
 document.getElementById("years").addEventListener("input", function () {
-  document.getElementById("years-display").innerHTML =
-    `<strong>${this.value}</strong> let`;
+  updateYearsDisplay(this.value);
   calculateAndUpdateChart();
 });
 
@@ -293,6 +349,7 @@ function hideInvestmentMessage() {
   document.getElementById("investment-message").style.display = "none";
 }
 
+applyTranslations();
 updateInputValue(document.getElementById("initial"), 50000);
 updateInputValue(document.getElementById("monthly"), 2500);
 calculateAndUpdateChart();
