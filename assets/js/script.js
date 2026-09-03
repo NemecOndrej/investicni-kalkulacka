@@ -16,8 +16,18 @@ const translations = {
     investment: "Investice",
     appreciation: "Zhodnocení",
     months: [
-      "Leden", "Únor", "Březen", "Duben", "Květen", "Červen",
-      "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec",
+      "Leden",
+      "Únor",
+      "Březen",
+      "Duben",
+      "Květen",
+      "Červen",
+      "Červenec",
+      "Srpen",
+      "Září",
+      "Říjen",
+      "Listopad",
+      "Prosinec",
     ],
     disclaimer:
       "<strong>Upozornění:</strong> Prezentované scénáře představují odhad budoucí výkonnosti založený na údajích z minulosti týkajících se toho, jak se mění hodnota této investice, a/nebo na aktuálních tržních podmínkách a nepředstavují přesný ukazatel. Váš zisk se bude lišit v závislosti na tom, jaká bude situace na trhu a jak dlouho budete investici/produkt držet. Aurelia nemovitostní fond SMS & Axelor, podfond je podfondem Aurelia fondy SICAV a.s.",
@@ -37,11 +47,21 @@ const translations = {
     investment: "Contributions",
     appreciation: "Portfolio value",
     months: [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ],
     disclaimer:
-      "<strong>Disclaimer:</strong> The scenarios presented are estimates of future performance based on past data regarding changes in the value of this investment and/or current market conditions and are not an exact indicator. Your return will vary depending on market conditions and how long you hold the investment/product. Aurelia nemovitostní fond SMS & Axelor, podfond is a sub-fund of Aurelia fondy SICAV a.s.",
+      "<strong>Disclaimer:</strong> The scenarios presented are estimates of future performance based on past data regarding changes in the value of this investment and/or current market conditions and are not an exact indicator. Your return will vary depending on market conditions and how long you hold the investment/product. Aurelia nemovitostní fond, podfond is a sub-fund of Aurelia fondy SICAV a.s.",
   },
 };
 
@@ -80,8 +100,7 @@ function formatNumberWithCurrency(value) {
     currency: "CZK",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  })
-    .format(value);
+  }).format(value);
 }
 
 // Vyčištění vstupní hodnoty pro čisté číslo
