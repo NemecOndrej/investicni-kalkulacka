@@ -30,7 +30,7 @@ const translations = {
       "Prosinec",
     ],
     disclaimer:
-      "<strong>Upozornění:</strong> Prezentované scénáře představují odhad budoucí výkonnosti založený na údajích z minulosti týkajících se toho, jak se mění hodnota této investice, a/nebo na aktuálních tržních podmínkách a nepředstavují přesný ukazatel. Váš zisk se bude lišit v závislosti na tom, jaká bude situace na trhu a jak dlouho budete investici/produkt držet. Aurelia nemovitostní fond SMS & Axelor, podfond je podfondem Aurelia fondy SICAV a.s.",
+      "<strong>Upozornění:</strong> Prezentované scénáře představují odhad budoucí výkonnosti založený na údajích z minulosti týkajících se toho, jak se mění hodnota této investice, a/nebo na aktuálních tržních podmínkách a nepředstavují přesný ukazatel. Váš zisk se bude lišit v závislosti na tom, jaká bude situace na trhu a jak dlouho budete investici/produkt držet. Aurelia nemovitostní fond, podfond je podfondem Aurelia fondy SICAV a.s.",
   },
   en: {
     title: "Investment Calculator",
