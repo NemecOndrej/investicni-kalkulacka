@@ -30,7 +30,7 @@ const translations = {
       "Prosinec",
     ],
     disclaimer:
-      "<strong>Upozornění:</strong> Prezentované scénáře představují odhad budoucí výkonnosti založený na údajích z minulosti týkajících se toho, jak se mění hodnota této investice, a/nebo na aktuálních tržních podmínkách a nepředstavují přesný ukazatel. Váš zisk se bude lišit v závislosti na tom, jaká bude situace na trhu a jak dlouho budete investici/produkt držet. Aurelia nemovitostní fond, podfond je podfondem Aurelia fondy SICAV a.s.",
+      "<strong>Upozornění:</strong> Výpočet je založen na očekávaném zhodnocení, které není zárukou budoucích výnosů. Očekávané zhodnocení vychází z cílového výnosu fondu. Prezentovaný výpočet je pouze ilustrativním odhadem budoucí výkonnosti založeným na stanovených předpokladech a nepředstavuje přesný ukazatel budoucího vývoje. Hodnota investice může kolísat, růst i klesat a investor nemusí získat zpět celou investovanou částku. Výpočet nezahrnuje poplatky a další náklady spojené s investicí. Výnos investora může podléhat zdanění v závislosti na jeho individuální situaci a příslušné daňové úpravě, která se může v budoucnu změnit. Další informace o investici, jejích rizicích a nákladech naleznete ve statutu fondu a ve sdělení klíčových informací (KID). Aurelia nemovitostní fond, podfond, je podfondem Aurelia fondy SICAV a.s.",
   },
   en: {
     title: "Investment Calculator",
@@ -61,7 +61,7 @@ const translations = {
       "December",
     ],
     disclaimer:
-      "<strong>Disclaimer:</strong> The scenarios presented are estimates of future performance based on past data regarding changes in the value of this investment and/or current market conditions and are not an exact indicator. Your return will vary depending on market conditions and how long you hold the investment/product. Aurelia nemovitostní fond, podfond is a sub-fund of Aurelia fondy SICAV a.s.",
+      "<strong>Disclaimer:</strong> The calculation is based on expected appreciation, which is not a guarantee of future returns. The expected appreciation is derived from the fund's target return. The calculation presented is merely an illustrative estimate of future performance based on specified assumptions and is not an exact indicator of future developments. The value of the investment may fluctuate, rise or fall, and the investor may not get back the full amount invested. The calculation does not include fees and other costs associated with the investment. The investor's return may be subject to taxation depending on their individual circumstances and the applicable tax legislation, which may change in the future. Further information about the investment, its risks and costs can be found in the fund's statute and in the Key Information Document (KID). Aurelia nemovitostní fond, podfond, is a sub-fund of Aurelia fondy SICAV a.s.",
   },
 };
 
